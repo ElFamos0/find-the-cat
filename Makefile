@@ -1,4 +1,5 @@
-FILES 	=	main.c
+FILES 	=	main.c \
+		validation.c
 
 S_PATH	=	srcs/
 O_PATH	=	objs/
