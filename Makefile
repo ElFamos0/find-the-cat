@@ -1,5 +1,7 @@
 FILES 	=	main.c \
-		validation.c
+		validation.c\
+		parsing.c\
+		token.c
 
 S_PATH	=	srcs/
 O_PATH	=	objs/
@@ -30,11 +32,11 @@ all:		${NAME}
 
 clean:
 			@${RM} ${O_PATH}*
-			@echo "${BOLD}${SRED}Removing${S}${S} ${IGREY}${O_PATH}${S} 🗑️"
+			@echo "Removing${S}${S} {O_PATH}${S} "
 
 fclean:		clean
 			@${RM} ${NAME}
-			@echo "${BOLD}${SRED}Removing${S}${S} ${IGREY}${NAME}${S} 🗑️"
+			@echo "Removing${S}${S} ${NAME}${S} "
 
 space:
 			@echo " "
