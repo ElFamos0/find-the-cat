@@ -44,11 +44,16 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
         p->test_mode = 1;
         break;
     case TOKEN_UNKNOWN:
-        p->test_mode = 1;
+        /* p->test_mode = 1; */
+        if (i+1 == argc) {
+            printf("Error : token %s was not provided with a value.\n",argv[i]);
+        }
+        else {
         create_token_item(&t, tok, argv[i+1], i);
         add_token(l,&t);
         free(t.value);
         incr = 1;
+        }
         break;
     default:
         break;
