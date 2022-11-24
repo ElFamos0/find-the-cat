@@ -5,10 +5,11 @@
 #include "../includes/validation.h"
 #include "../includes/parsing.h"
 #include "../includes/token.h"
+#include "../includes/dirent.h"
 
 int main(int argc, char *argv[])
 {
-    if (argc>=2){
+    if (argc>2){
         // most common use case
         if (verify_path(argv[1]) == 0){
             printf("Path is valid\n");
@@ -27,6 +28,14 @@ int main(int argc, char *argv[])
                 printf("Test mode is off\n");
             }
             free_tokenl(&l);
+        } else {       
+            printf("Path is invalid\n");
+        }
+    }
+    if (argc==2){
+        if (verify_path(argv[1]) == 0){
+            // print all the subdirectories
+            ft_fetch_path(argv[1]);
         } else {       
             printf("Path is invalid\n");
         }

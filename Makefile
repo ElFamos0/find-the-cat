@@ -1,7 +1,8 @@
 FILES 	=	main.c \
 		validation.c\
 		parsing.c\
-		token.c
+		token.c\
+		dirent.c
 
 S_PATH	=	srcs/
 O_PATH	=	objs/

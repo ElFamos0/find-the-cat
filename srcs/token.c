@@ -14,7 +14,6 @@ void free_tokenl(token_list *t){
     free(t->data);    
 }
 
-
 void create_tokenl(token_list *l, int size){
     l->data = (token_item *)malloc(sizeof(token_item) * size);
     l->ptr = 0;
