@@ -50,7 +50,7 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
         p->test_mode = 1;
         break;
     case TOKEN_NAME :
-        if (i+1 == argc || detect_token(argv[i+1] != TOKEN_UNKNOWN)) {
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
             printf("Error : Option -name was not provided with a value.\n");
         }
         else {
@@ -61,7 +61,7 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
         }
         break;
     case TOKEN_SIZE :
-        if (i+1 == argc || detect_token(argv[i+1] != TOKEN_UNKNOWN)) {
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
             printf("Error : Option -size was not provided with a value.\n");
         }
         else {

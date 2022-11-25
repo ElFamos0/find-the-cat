@@ -7,10 +7,6 @@
 #include <stdio.h>
 #include <string.h>
 
-const char * parameter_name[] = {
-    "-test", "-name" , "-size", "-mime", "-ctc", "-dir"
-};
-
 typedef enum _Token{
     TOKEN_TEST,
     TOKEN_NAME,
