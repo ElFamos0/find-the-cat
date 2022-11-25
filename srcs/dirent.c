@@ -27,5 +27,7 @@ void ft_fetch_path(const char *path){
         }
 
         free(new_path);
+        
     }
+    closedir(dir);
 }
