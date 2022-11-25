@@ -25,8 +25,6 @@ void ft_fetch_path(path_list *pl, const char *path) {
         if (entry->d_type == DT_DIR){
             ft_fetch_path(pl, new_path);
         }
-
-        free(new_path);
         
     }
     closedir(dir);
