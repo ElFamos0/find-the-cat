@@ -31,3 +31,30 @@ void ft_fetch_path(const char *path){
     }
     closedir(dir);
 }
+
+void create_path_list(path_list *l, int size){
+    l->path_data = (char **)malloc(sizeof(char *) * size);
+    l->ptr = 0;
+    l->size = size;
+}
+
+void free_path_list(path_list *l){
+    for (int i = 0; i < l->ptr; i++){
+        free(l->path_data[i]);
+    }
+    free(l->path_data);    
+}
+
+void add_path(path_list *l, char *path){
+    if (l->ptr == l->size){
+        l->size += 1;
+        l->path_data = (char **)realloc(l->path_data, sizeof(char *) * l->size);
+    }
+    l->path_data[l->ptr++] = path;
+}
+
+void print_path_list(path_list *l){
+    for (int i = 0; i < l->ptr; i++){
+        printf("%s\n", l->path_data[i]);
+    }
+}

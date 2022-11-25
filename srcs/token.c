@@ -21,7 +21,7 @@ void create_tokenl(token_list *l, int size){
 }
 
 void print_token(token_item *t){
-    printf("La valeur du flag %d est %s", t->token, t->value);
+    printf("La valeur du flag %d est %s\n", t->token, t->value);
 }
 
 void print_token_list(token_list *l){
@@ -31,9 +31,10 @@ void print_token_list(token_list *l){
     }
 }
 
+
 void add_token(token_list *l, token_item *t){
     if (l->ptr == l->size){
-        l->size *= 2;
+        l->size += 1;
         l->data = (token_item *)realloc(l->data, sizeof(token_item) * l->size);
     }
     token_item *token;
