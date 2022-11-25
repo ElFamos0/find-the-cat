@@ -9,14 +9,13 @@
 
 int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
 
+    create_path_list(p_list, 1);
+    create_tokenl(l, 1);
     if (argc >2) {
         // Most common cases
         if (verify_path(argv[1]) == 0){
                 printf("Path is valid\n");
                 parser_t parser;
-
-                create_tokenl(l, 1);
-
                 make_parser(&parser,l,argc,argv);
 
                 if (parser.test_mode == 1){
@@ -35,7 +34,7 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
         }
     if (argc==2){
         if (verify_path(argv[1]) == 0){
-            create_path_list(p_list, 1);
+            
             ft_fetch_path(p_list, argv[1]);
             print_path_list(p_list);
         } else {       
@@ -74,6 +73,7 @@ int exec_find(path_list *p_list,token_list * tl) {
 }
 
 void free_all(path_list * pl, token_list * tl) {
+   
     free_tokenl(tl);
     free_path_list(pl);
 }
