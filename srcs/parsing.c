@@ -30,6 +30,12 @@ int detect_token(char* token){
     if (strcmp(token, "-test") == 0){
         return TOKEN_TEST;
     }
+    else if (strcmp(token, "-name") == 0){
+        return TOKEN_NAME;
+    }
+    else if (strcmp(token, "-size") == 0){
+        return TOKEN_SIZE;
+    }
     else{
         return TOKEN_UNKNOWN;
     }
@@ -43,10 +49,32 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
     case TOKEN_TEST:
         p->test_mode = 1;
         break;
+    case TOKEN_NAME :
+        if (i+1 == argc || detect_token(argv[i+1] != TOKEN_UNKNOWN)) {
+            printf("Error : Option -name was not provided with a value.\n");
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
+    case TOKEN_SIZE :
+        if (i+1 == argc || detect_token(argv[i+1] != TOKEN_UNKNOWN)) {
+            printf("Error : Option -size was not provided with a value.\n");
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
     case TOKEN_UNKNOWN:
         /* p->test_mode = 1; */
         if (i+1 == argc) {
-            printf("Error : token %s was not provided with a value.\n",argv[i]);
+            printf("Error : Unknown token %s was not provided with a value.\n",argv[i]);
         }
         else {
         create_token_item(&t, tok, argv[i+1], i);
