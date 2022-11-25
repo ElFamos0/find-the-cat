@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "parsing.h": "c",
-        "dirent.h": "c"
+        "dirent.h": "c",
+        "validation.h": "c"
     }
 }

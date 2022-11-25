@@ -6,6 +6,9 @@
 #include "../includes/parsing.h"
 #include "../includes/token.h"
 #include "../includes/dirent.h"
+#include "../includes/exec.h"
+#include "../includes/exec_parser.h"
+
 
 
 int main(int argc, char *argv[])
