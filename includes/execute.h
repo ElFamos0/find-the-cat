@@ -8,5 +8,5 @@
 
 int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l);
 int exec_find(path_list *p_list,token_list * tl);
-
+void free_all(path_list *pl, token_list * tl);
 #endif

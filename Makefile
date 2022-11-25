@@ -2,7 +2,10 @@ FILES 	=	main.c \
 		validation.c\
 		parsing.c\
 		token.c\
-		dirent.c
+		dirent.c\
+		execute.c\
+		size.c\
+		name.c
 
 S_PATH	=	srcs/
 O_PATH	=	objs/
