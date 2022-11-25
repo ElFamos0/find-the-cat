@@ -14,21 +14,27 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
     if (argc >2) {
         // Most common cases
         if (verify_path(argv[1]) == 0){
-                printf("Path is valid\n");
+                //printf("Path is valid.\n");
                 parser_t parser;
                 make_parser(&parser,l,argc,argv);
                 ft_fetch_path(p_list, argv[1]);
+                if (parser.error_tok == 1) {
+                    return 1;
+                }
                 if (parser.test_mode == 1){
                     printf("Test mode is on\n");
                     print_token_list(l);
                 }
                 else{
+
                     printf("Test mode is off\n");
                 }
                 
+                
+                
 
             } else {       
-                printf("Path is invalid\n");
+                printf("Path is invalid.\n");
                 return 1;
             }
         }
@@ -36,9 +42,9 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
         if (verify_path(argv[1]) == 0){
             
             ft_fetch_path(p_list, argv[1]);
-            print_path_list(p_list);
+            
         } else {       
-            printf("Path is invalid\n");
+            printf("Path is invalid.\n");
             return 1;
         }
     }

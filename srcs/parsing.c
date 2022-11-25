@@ -2,27 +2,30 @@
 
 
 
-void make_parser(parser_t *p,token_list *l,int argc, char *argv[]) {
+int make_parser(parser_t *p,token_list *l,int argc, char *argv[]) {
     int i = 2;
     int incr = 0;
     p->test_mode = 0;
+    p->error_tok = 0;
 
     while (i < argc) {
         if (!argv[i]) {
             p->error_nb = i;
-            return;
+            return 1;
         }
         if (argv[i][0] == '-') {
             // there is a parameter here
             token_t tok = detect_token(argv[i]);
             incr = set_token_opt(p,l, tok, argc, argv, i);
-        
+            if(incr == -1) 
+            {return 1;}
+
             // to ignore all parameter values
             i += incr;
         }
         i++;
     }
-    return;
+    return 0;
 }
 
 
@@ -52,6 +55,8 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
     case TOKEN_NAME :
         if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
             printf("Error : Option -name was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
         }
         else {
         create_token_item(&t, tok, argv[i+1], i);
@@ -63,6 +68,8 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
     case TOKEN_SIZE :
         if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
             printf("Error : Option -size was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
         }
         else {
         create_token_item(&t, tok, argv[i+1], i);
@@ -72,9 +79,11 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
         }
         break;
     case TOKEN_UNKNOWN:
-        /* p->test_mode = 1; */
+        p->error_tok = 1;
         if (i+1 == argc) {
-            printf("Error : Unknown token %s was not provided with a value.\n",argv[i]);
+            printf("Error : An unknown option '%s' was provided.\n",argv[i]);
+            p->error_tok = 1;
+            return -1;
         }
         else {
         create_token_item(&t, tok, argv[i+1], i);
