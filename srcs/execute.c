@@ -17,7 +17,7 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
                 printf("Path is valid\n");
                 parser_t parser;
                 make_parser(&parser,l,argc,argv);
-
+                ft_fetch_path(p_list, argv[1]);
                 if (parser.test_mode == 1){
                     printf("Test mode is on\n");
                     print_token_list(l);

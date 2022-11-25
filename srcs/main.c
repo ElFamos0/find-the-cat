@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     token_list tl;
     exec_parser(argc,argv,&pl,&tl);
     exec_find(&pl,&tl);
+    print_path_list(&pl);
     free_all(&pl,&tl);
 
 }
