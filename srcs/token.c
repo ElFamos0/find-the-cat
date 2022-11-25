@@ -21,7 +21,7 @@ void create_tokenl(token_list *l, int size){
 }
 
 void print_token(token_item *t){
-    printf("Token: %d, Value: %s, Position: %d\n", t->token, t->value, t->position);
+    printf("La valeur du flag %d est %s", t->token, t->value);
 }
 
 void print_token_list(token_list *l){

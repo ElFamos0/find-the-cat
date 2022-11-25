@@ -7,13 +7,18 @@
 #include <stdio.h>
 #include <string.h>
 
+const char * parameter_name[] = {
+    "-test", "-name" , "-size" , "-name", "-mime", "-ctc", "-dir"
+};
 
 typedef enum _Token{
     TOKEN_TEST,
+    TOKEN_NAME,
+    TOKEN_SIZE,
     TOKEN_UNKNOWN,
 } token_t;
 
-typedef struct _tokenl {
+typedef struct _token_item {
     token_t token;
     char * value;
     int position;
