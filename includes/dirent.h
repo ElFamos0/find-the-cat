@@ -21,7 +21,7 @@ void print_path_list(path_list *l);
 
 
 
-void ft_fetch_path(const char *path);
+void ft_fetch_path(path_list *l, const char *path);
 
 
 #endif // DIRENT_H

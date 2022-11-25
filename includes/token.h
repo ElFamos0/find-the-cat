@@ -8,7 +8,7 @@
 #include <string.h>
 
 const char * parameter_name[] = {
-    "-test", "-name" , "-size" , "-name", "-mime", "-ctc", "-dir"
+    "-test", "-name" , "-size", "-mime", "-ctc", "-dir"
 };
 
 typedef enum _Token{

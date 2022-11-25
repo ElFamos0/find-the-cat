@@ -7,6 +7,7 @@
 #include "../includes/token.h"
 #include "../includes/dirent.h"
 
+
 int main(int argc, char *argv[])
 {
     if (argc>2){
@@ -34,8 +35,11 @@ int main(int argc, char *argv[])
     }
     if (argc==2){
         if (verify_path(argv[1]) == 0){
-            // print all the subdirectories
-            ft_fetch_path(argv[1]);
+            path_list pl;
+            create_path_list(&pl, 1);
+            ft_fetch_path(&pl, argv[1]);
+            print_path_list(&pl);
+            free_path_list(&pl);
         } else {       
             printf("Path is invalid\n");
         }
