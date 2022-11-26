@@ -19,7 +19,7 @@ void free_path_list(path_list *l);
 void add_path(path_list *l, char *path);
 void print_path_list(path_list *l);
 
-void delete_path(path_list *l, char *path);
+void delete_path(path_list *l, const char *path);
 
 void ft_fetch_path(path_list *l, const char *path);
 

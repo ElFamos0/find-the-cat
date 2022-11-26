@@ -52,15 +52,23 @@ void add_path(path_list *l, char *path){
 }
 
 
-void delete_path(path_list *l, char *path){
+void delete_path(path_list *l, const char *path){
+    int ind = -1;
     for (int i = 0; i < l->ptr; i++){
-        if(l->path_data[i] == NULL){
-            continue;
-        }
         if (strcmp(l->path_data[i], path) == 0){
-            l->path_data[i] = NULL;        
+            ind = i;  
+            break;     
         }
     }
+    if (ind >= 0) {
+        free(l->path_data[ind]);
+        for(int i = ind; i<l->ptr-1;i++){
+            l->path_data[i] = l->path_data[i+1];
+        }
+        l->ptr += -1;
+    }
+    
+
 }
 
 
