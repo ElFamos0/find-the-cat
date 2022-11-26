@@ -58,8 +58,7 @@ void delete_path(path_list *l, char *path){
             continue;
         }
         if (strcmp(l->path_data[i], path) == 0){
-            l->path_data[i] = NULL;
-            printf("Deleted path %s\n", path);          
+            l->path_data[i] = NULL;        
         }
     }
 }
