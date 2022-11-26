@@ -53,9 +53,13 @@ void add_path(path_list *l, char *path){
 
 
 void delete_path(path_list *l, char *path){
-    for (int i = 0; i < l->size; i++){
+    for (int i = 0; i < l->ptr; i++){
+        if(l->path_data[i] == NULL){
+            continue;
+        }
         if (strcmp(l->path_data[i], path) == 0){
-            l->path_data[i] = NULL;           
+            l->path_data[i] = NULL;
+            printf("Deleted path %s\n", path);          
         }
     }
 }

@@ -18,6 +18,9 @@ int get_file_by_name(char * value, path_list * pl) {
                     printf("Found file %s in %s\n", value, newpath);
                     free(newpath);
                 }
+                else{
+                    delete_path(pl, path);
+                }
             }
             closedir(dir);
         }
