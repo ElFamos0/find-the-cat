@@ -2,7 +2,7 @@
 #include <sys/stat.h>
 
 int get_file_by_name(char * value, path_list * pl) {
-    printf("Searching for file %s\n", value);
+    printf("Searching for file %s.\n", value);
     int i = 0;
     
     while (i < pl->ptr) {
@@ -31,5 +31,11 @@ int get_file_by_name(char * value, path_list * pl) {
         free(path);
         i+= incr;
     }
-    return 0;
+    if (pl->ptr > 0) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
+    
 }

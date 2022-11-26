@@ -53,15 +53,23 @@ int exec_find(path_list *p_list,token_list * tl) {
     for (int i = 0; i < tl->ptr; i++){
         token = tl->data[i];
         tok = token.token;
-
+        int error = 0;
         switch (tok)
         {
         case TOKEN_NAME:
-            get_file_by_name(token.value,p_list);
+            error = get_file_by_name(token.value,p_list);
+            if (error == 1) {
+                printf("Error : No file found with name '%s'\n",token.value);
+                return 1;
+            }
             break;
         
         case TOKEN_SIZE:
-            get_file_by_size(token.value,p_list);
+            error = get_file_by_size(token.value,p_list);
+            if (error == 1) {
+                printf("Error : No file found with size '%s'\n",token.value);
+                return 1;
+            }
             break;
 
         default :
