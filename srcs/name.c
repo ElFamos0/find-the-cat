@@ -22,11 +22,17 @@ int get_file_by_name(char * value, path_list * pl) {
                             incr = 0;
                         }
                 }
+                else {
+                    delete_path(pl, path);
+                    incr = 0;
+                }
+                
+            }
+            else {
                 delete_path(pl, path);
                 incr = 0;
             }
-            delete_path(pl, path);
-            incr = 0;
+            
         }
         free(path);
         i+= incr;
