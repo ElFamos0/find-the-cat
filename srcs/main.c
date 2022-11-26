@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
         free_all(&pl,&tl);
         return 1;
     }
-    print_path_list(&pl);
+    //print_path_list(&pl);
     free_all(&pl,&tl);
 
 }

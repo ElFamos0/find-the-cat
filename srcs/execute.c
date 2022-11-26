@@ -26,12 +26,8 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
                     print_token_list(l);
                 }
                 else{
-
                     printf("Test mode is off\n");
-                }
-                
-                
-                
+                }                
 
             } else {       
                 printf("Path is invalid.\n");
@@ -40,9 +36,7 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
         }
     if (argc==2){
         if (verify_path(argv[1]) == 0){
-            
             ft_fetch_path(p_list, argv[1]);
-            
         } else {       
             printf("Path is invalid.\n");
             return 1;
@@ -78,8 +72,7 @@ int exec_find(path_list *p_list,token_list * tl) {
     return 0;
 }
 
-void free_all(path_list * pl, token_list * tl) {
-   
+void free_all(path_list * pl, token_list * tl) { 
     free_tokenl(tl);
     free_path_list(pl);
 }

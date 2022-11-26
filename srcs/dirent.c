@@ -51,8 +51,20 @@ void add_path(path_list *l, char *path){
     l->path_data[l->ptr++] = path;
 }
 
+
+void delete_path(path_list *l, char *path){
+    for (int i = 0; i < l->size; i++){
+        if (strcmp(l->path_data[i], path) == 0){
+            l->path_data[i] = NULL;           
+        }
+    }
+}
+
+
 void print_path_list(path_list *l){
     for (int i = 0; i < l->ptr; i++){
-        printf("%s\n", l->path_data[i]);
+        if (l->path_data[i] != NULL){
+            printf("%s\n", l->path_data[i]);
     }
+}
 }
