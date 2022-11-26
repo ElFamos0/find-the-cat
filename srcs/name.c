@@ -23,7 +23,7 @@ int regex_check(char * path, char * value) {
 
 
 int get_file_by_name(char * value, path_list * pl) {
-    printf("Searching for file %s.\n", value);
+    //printf("Searching for file %s.\n", value);
     int i = 0;
     
     while (i < pl->ptr) {
