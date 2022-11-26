@@ -5,6 +5,7 @@
 #include "../includes/dirent.h"
 #include "../includes/name.h"
 #include "../includes/size.h"
+#include "../includes/date.h"
 
 
 int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
@@ -72,6 +73,13 @@ int exec_find(path_list *p_list,token_list * tl) {
             }
             break;
 
+        case TOKEN_DATE :
+            error = get_file_by_date(token.value,p_list);
+            if (error == 1) {
+                printf("Error : No file found with last activity of '%s'\n",token.value);
+                return 1;
+            }
+            break;
         default :
             break;
         }

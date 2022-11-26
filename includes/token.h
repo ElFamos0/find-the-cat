@@ -11,6 +11,7 @@ typedef enum _Token{
     TOKEN_TEST,
     TOKEN_NAME,
     TOKEN_SIZE,
+    TOKEN_DATE,
     TOKEN_UNKNOWN,
 } token_t;
 

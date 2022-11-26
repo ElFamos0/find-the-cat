@@ -5,7 +5,8 @@ FILES 	=	main.c \
 		dirent.c\
 		execute.c\
 		size.c\
-		name.c
+		name.c\
+		date.c
 
 S_PATH	=	srcs/
 O_PATH	=	objs/
