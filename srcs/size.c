@@ -30,7 +30,7 @@ int get_file_by_size(char * value, path_list * pl) {
     }
     
     int size = get_size(value);
-    //printf("Size : %d\n",size);
+    //printf("Signe : %d\n",signe);
     if (size == -1) {
         return 1;
     }
@@ -59,7 +59,26 @@ int get_file_by_size(char * value, path_list * pl) {
                         }
                     break;
                 
+                case 1 :
+                    if (size < file_size) {
+                        printf("Found file %s\n", path);}
+                    else{
+                            delete_path(pl, path);
+                            incr = 0;
+                        }
+                    break;
+
+                case -1 :
+                    if (size > file_size) {
+                        printf("Found file %s\n", path);}
+                    else{
+                            delete_path(pl, path);
+                            incr = 0;
+                        }
+                    break;
+                
                 default:
+                    return 1;
                     break;
                 }
 
