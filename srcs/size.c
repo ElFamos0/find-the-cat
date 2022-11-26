@@ -43,5 +43,5 @@ int get_size(char * value){
     int size = 0;
 
 
-    return size
+    return size;
 }
