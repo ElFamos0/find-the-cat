@@ -23,11 +23,11 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
                     return 1;
                 }
                 if (parser.test_mode == 1){
-                    printf("Test mode is on\n");
+                    //printf("Test mode is on\n");
                     print_token_list(l);
                 }
                 else{
-                    printf("Test mode is off\n");
+                    //printf("Test mode is off\n");
                 }                
 
             } else {       
