@@ -48,4 +48,8 @@ space:
 
 re:			fclean space all
 
+test:		@mv ftc tests
+			@./test_args
+
+
 .PHONY: all clean fclean re build space

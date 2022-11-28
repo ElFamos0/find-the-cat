@@ -12,6 +12,9 @@ typedef enum _Token{
     TOKEN_NAME,
     TOKEN_SIZE,
     TOKEN_DATE,
+    TOKEN_MIME,
+    TOKEN_CTC,
+    TOKEN_DIR,
     TOKEN_UNKNOWN,
 } token_t;
 

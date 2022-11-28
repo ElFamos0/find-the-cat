@@ -1,5 +1,8 @@
 #include "../includes/token.h"
 
+char* param_list[7] = {"-test","-name","-size","-date","-mime","-ctc","-dir"};
+
+
 void create_token_item(token_item *t, token_t token, char * value, int position){
     t->token = token;
     t->value = malloc(sizeof(char) * TOKEN_MAX_SIZE);
@@ -21,11 +24,11 @@ void create_tokenl(token_list *l, int size){
 }
 
 void print_token(token_item *t){
-    printf("La valeur du flag %d est %s\n", t->token, t->value);
+    printf("La valeur du flag %s est %s\n", param_list[t->token], t->value);
 }
 
 void print_token_list(token_list *l){
-    printf("Token list:\n");
+    //printf("Token list:\n");
     for (int i = 0; i < l->ptr; i++){
         print_token(&l->data[i]);
     }

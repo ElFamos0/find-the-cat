@@ -39,6 +39,18 @@ int detect_token(char* token){
     else if (strcmp(token, "-size") == 0){
         return TOKEN_SIZE;
     }
+    else if (strcmp(token,"-date") == 0){
+        return TOKEN_DATE;
+    }
+    else if (strcmp(token,"-ctc") == 0){
+        return TOKEN_CTC;
+    }
+    else if (strcmp(token,"-mime") == 0){
+        return TOKEN_MIME;
+    }
+    else if (strcmp(token,"-dir") == 0){
+        return TOKEN_DIR;
+    }
     else{
         return TOKEN_UNKNOWN;
     }
@@ -79,6 +91,45 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
         }
         break;
     case TOKEN_DATE :
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            printf("Error : Option -date was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
+    case TOKEN_MIME :
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            printf("Error : Option -date was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
+    case TOKEN_CTC :
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            printf("Error : Option -date was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
+    case TOKEN_DIR :
         if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
             printf("Error : Option -date was not provided with a value.\n");
             p->error_tok = 1;
