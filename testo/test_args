@@ -19,7 +19,7 @@ function test_wellformed_param () {
     fi
 }
 
-test_wellformed_param "/home/pepito/x" "-name" "mimou"
+test_wellformed_param "~/x" "-name" "mimou"
 test_wellformed_param ".." "-size" "mimou"
 test_wellformed_param "." "-date" "mimou"
 test_wellformed_param "." "-ctc" "mimou"

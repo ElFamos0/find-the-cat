@@ -32,8 +32,13 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
                     //printf("Test mode is off\n");
                 }                
 
-            } else {       
-                printf("Path is invalid.\n");
+            } else {
+		parser_t parser;
+    		make_parser(&parser,l,argc,argv);
+		if(parser.test_mode == 1){
+		    print_token_list(l);
+		}
+                //printf("Path is invalid.\n");
                 return 1;
             }
         }
