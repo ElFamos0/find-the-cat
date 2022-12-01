@@ -52,6 +52,7 @@ int get_file_by_size(char * value, path_list * pl) {
                 {
                 case 0 :
                     if (size == file_size) {
+                        
                         printf("Found file %s\n", path);}
                     else{
                             delete_path(pl, path);

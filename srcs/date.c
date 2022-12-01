@@ -3,7 +3,7 @@
 #include <ctype.h> 
 
 int get_file_by_date(char * value, path_list * pl){
-    
+
 
     return 0;
 }
