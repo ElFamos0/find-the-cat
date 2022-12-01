@@ -51,6 +51,21 @@ int detect_token(char* token){
     else if (strcmp(token,"-dir") == 0){
         return TOKEN_DIR;
     }
+    else if (strcmp(token,"-color") == 0){
+        return TOKEN_COLOR;
+    }
+    else if (strcmp(token,"-perm") == 0){
+        return TOKEN_PERM;
+    }
+    else if (strcmp(token,"-link") == 0){
+        return TOKEN_LINK;
+    }
+    else if (strcmp(token,"-threads") == 0){
+        return TOKEN_THREADS;
+    }
+    else if (strcmp(token,"-ou") == 0){
+        return TOKEN_OU;
+    }
     else{
         return TOKEN_UNKNOWN;
     }
@@ -142,10 +157,76 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
         incr = 1;
         }
         break;
+    case TOKEN_COLOR :
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            printf("Error : Option -date was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
+    case TOKEN_PERM :
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            printf("Error : Option -perm was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
+    case TOKEN_LINK :
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            printf("Error : Option -link was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
+    case TOKEN_THREADS :
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            printf("Error : Option -threads was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
+    case TOKEN_OU :
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            printf("Error : Option -ou was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
     case TOKEN_UNKNOWN:
         p->error_tok = 1;
+        printf("Le flag %s n'est pas correct\n",argv[i]);
         if (i+1 == argc) {
-            printf("Error : An unknown option '%s' was provided.\n",argv[i]);
+
             p->error_tok = 1;
             return -1;
         }

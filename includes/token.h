@@ -15,6 +15,11 @@ typedef enum _Token{
     TOKEN_MIME,
     TOKEN_CTC,
     TOKEN_DIR,
+    TOKEN_COLOR,
+    TOKEN_PERM,
+    TOKEN_LINK,
+    TOKEN_THREADS,
+    TOKEN_OU,
     TOKEN_UNKNOWN,
 } token_t;
 

@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     test = exec_parser(argc, argv, &pl, &tl);
     if (test == 1){
 
-        printf("Early interruption.\n");
+        //printf("Early interruption.\n");
         free_all(&pl,&tl);
         return 1;
     }
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     
     if (exec_find(&pl,&tl) == 1) {
 
-        printf("Early interruption.\n");
+        //printf("Early interruption.\n");
         free_all(&pl,&tl);
         return 1;
     }
