@@ -22,7 +22,7 @@ NAME	=	ftc
 
 RM		=	rm -rf
 
-CFLAGS	= 	-Werror -Wall -O0 -g3 -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls -pthread
+CFLAGS	= 	-Werror -Wall -O0 -g3 -fno-omit-frame-pointer -fno-optimize-sibling-calls -pthread
 
 ${O_PATH}%.o:	${S_PATH}%.c
 				@mkdir -p ${dir $@}
