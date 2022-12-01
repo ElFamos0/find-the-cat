@@ -1,7 +1,6 @@
 #include "../includes/token.h"
 
-char* param_list[12] = {"-test","-name","-size","-date","-mime","-ctc","-dir","-color","-perm","-link","-threads","-ou"};
-
+char* param_list[13] = {"-test","-name","-size","-date","-mime","-ctc","-dir","-color","-perm","-link","-threads","-ou","-type"};
 
 void create_token_item(token_item *t, token_t token, char * value, int position){
     t->token = token;

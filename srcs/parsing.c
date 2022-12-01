@@ -66,6 +66,9 @@ int detect_token(char* token){
     else if (strcmp(token,"-ou") == 0){
         return TOKEN_OU;
     }
+    else if (strcmp(token,"-type")==0){
+    	return TOKEN_TYPE;
+    }
     else{
         return TOKEN_UNKNOWN;
     }
@@ -212,6 +215,19 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
     case TOKEN_OU :
         if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
             printf("Error : Option -ou was not provided with a value.\n");
+            p->error_tok = 1;
+            return -1;
+        }
+        else {
+        create_token_item(&t, tok, argv[i+1], i);
+        add_token(l,&t);
+        free(t.value);
+        incr = 1;
+        }
+        break;
+    case TOKEN_TYPE :
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            printf("Error : Option -threads was not provided with a value.\n");
             p->error_tok = 1;
             return -1;
         }

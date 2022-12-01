@@ -20,6 +20,7 @@ typedef enum _Token{
     TOKEN_LINK,
     TOKEN_THREADS,
     TOKEN_OU,
+    TOKEN_TYPE,
     TOKEN_UNKNOWN,
 } token_t;
 
