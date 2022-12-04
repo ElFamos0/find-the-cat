@@ -3,7 +3,7 @@
 #include <ctype.h> 
 
 int get_file_by_size(char * value, path_list * pl) {
-    printf("Searching for file with size %s bytes.\n", value);
+    //printf("Searching for file with size %s bytes.\n", value);
     int i = 0;
     int len = strlen(value);
     int signe = 0;
@@ -51,28 +51,21 @@ int get_file_by_size(char * value, path_list * pl) {
                 switch (signe)
                 {
                 case 0 :
-                    if (size == file_size) {
-                        
-                        printf("Found file %s\n", path);}
-                    else{
+                    if (!(size == file_size)) {
                             delete_path(pl, path);
                             incr = 0;
                         }
                     break;
                 
                 case 1 :
-                    if (size < file_size) {
-                        printf("Found file %s\n", path);}
-                    else{
+                    if (!(size < file_size)) {
                             delete_path(pl, path);
                             incr = 0;
-                        }
+                    }
                     break;
 
                 case -1 :
-                    if (size > file_size) {
-                        printf("Found file %s\n", path);}
-                    else{
+                    if (!(size > file_size)) {
                             delete_path(pl, path);
                             incr = 0;
                         }
