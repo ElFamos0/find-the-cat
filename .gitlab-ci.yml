@@ -1,4 +1,4 @@
-image: racouchot/projet_sys22
+image: gl-registry.telecomnancy.univ-lorraine.fr/christophe.bouthier/rs2022-dockertest:latest
 
 stages:
   - build
@@ -12,7 +12,6 @@ build:
     - cp /tests/* tests
     - mkdir arbre
     - cp -r /arbre/* arbre
-    - test -e Makefile
   script:
     - make
   after_script:
@@ -22,8 +21,6 @@ build:
       - ./ftc
       - ./arbre
       - ./tests
-
-
 
 test-arguments:
   stage: test
