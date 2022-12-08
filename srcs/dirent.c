@@ -10,6 +10,16 @@ void ft_fetch_path(path_list *pl, const char *path) {
         return;
     }
 
+    if(strcmp(path,".") != 0 || strcmp(path,"..") != 0){
+            // on ignore les dossiers . et .. car non voulu
+	char * first_path;
+	first_path = malloc(strlen(path) + 2);
+	strcpy(first_path,path);
+	add_path(pl,first_path);
+	
+    }
+
+
     while((entry = readdir(dir)) != NULL) {
         char *new_path;
 
