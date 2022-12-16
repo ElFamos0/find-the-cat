@@ -23,7 +23,6 @@ int get_file_by_size(char * value, path_list * pl) {
             break;
         default :
             if (!(isdigit(value[0]))) {
-                printf("oh");
                 return 1;
             }
             break;
