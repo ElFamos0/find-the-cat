@@ -9,6 +9,7 @@
 #include "../includes/mime.h"
 #include "../includes/ctc.h"
 #include "../includes/dir.h"
+#include "../includes/perm.h"
 
 
 int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
@@ -126,6 +127,13 @@ int exec_find(path_list *p_list,token_list * tl) {
             error = get_file_by_ctc(token.value,p_list);
             if (error == 1) {
                 //printf("Error : No file found with ctc '%s'\n",token.value);
+                return 1;
+            }
+            break;
+        case TOKEN_PERM:
+            error = get_file_by_perm(token.value,p_list);
+            if (error == 1) {
+                //printf("Error : No file found with permission '%s'\n",token.value);
                 return 1;
             }
             break;
