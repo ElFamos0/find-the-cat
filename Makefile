@@ -9,7 +9,8 @@ FILES 	=	main.c \
 		date.c\
 		mime.c\
 		ctc.c \
-		dir.c
+		dir.c \
+		perm.c
 
 S_PATH	=	srcs/
 O_PATH	=	objs/

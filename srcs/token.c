@@ -33,7 +33,6 @@ void print_token_list(token_list *l){
     }
 }
 
-
 void add_token(token_list *l, token_item *t){
     if (l->ptr == l->size){
         l->size += 1;
