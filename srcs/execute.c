@@ -102,6 +102,16 @@ int exec_find(path_list *p_list,token_list * tl) {
                 return 2;
             }
             break;
+        case TOKEN_DIR :
+            error = get_file_by_name(token.value,p_list);
+            if (error == 1) {
+                //printf("Error : No file found with last activity of '%s'\n",token.value);
+                return 1;
+            }
+            else if (error == 2) {
+                return 2;
+            }
+            break;
         case TOKEN_MIME:
             error = get_file_by_mime(token.value,p_list);
             if (error == 1) {

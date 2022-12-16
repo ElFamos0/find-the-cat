@@ -149,11 +149,19 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
         }
         break;
     case TOKEN_DIR :
-        create_token_item(&t, tok, "None", i);
-        add_token(l,&t);
+        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
+            create_token_item(&t, tok, ".", i);
+            add_token(l,&t);
+            incr = 0;
+        }
+        else {
+            create_token_item(&t, tok, argv[i+1], i);
+            add_token(l,&t);
+            incr = 1;
+        }
+        // VNTGMMRSP
         p->file_mod = 1;
         free(t.value);
-        incr = 0;
         break;
     case TOKEN_COLOR :
         if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
