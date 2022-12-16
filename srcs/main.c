@@ -14,6 +14,13 @@ int main(int argc, char *argv[])
     int test = 0;
     path_list pl;
     token_list tl;
+    // remove trailing slash from argv[1]
+    if (argc > 1) {
+        if (argv[1][strlen(argv[1])-1] == '/') {
+            argv[1][strlen(argv[1])-1] = '\0';
+        }
+    }
+
     test = exec_parser(argc, argv, &pl, &tl);
     if (test == 1){
 
