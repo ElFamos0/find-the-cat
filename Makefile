@@ -8,6 +8,7 @@ FILES 	=	main.c \
 		name.c\
 		date.c\
 		mime.c\
+		ctc.c \
 		dir.c
 
 S_PATH	=	srcs/
