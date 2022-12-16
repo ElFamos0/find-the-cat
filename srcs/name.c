@@ -29,10 +29,32 @@ int get_file_by_name(char * value, path_list * pl) {
         int incr = 1;
         char * path = malloc(sizeof(char) * (strlen(pl->path_data[i])+1));
         strcpy(path,pl->path_data[i]);
+
+        int n = strlen(path);
+        char filename[n+1];
+
+        int j = n-1;
+        int state = 1;
+        while(j >= 0 && state) {
+            if (path[j] == '/') {
+                state = 0;
+                j++;
+            }
+            else {
+                j--;
+            }
+        }
+        path+=j;
+        strcpy(filename,path);
+        filename[n-j] = '\0';
+        path -=j;
+
+
+
         struct stat st;
         if (stat(path, &st) == 0) {
             if (S_ISREG(st.st_mode)||1) {
-                if (regex_check(path, value) == 0) {
+                if (regex_check(filename, value) == 0) {
                     //printf("Found file %s.\n", path);
                 }
                 else{
