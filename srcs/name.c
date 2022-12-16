@@ -2,6 +2,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <regex.h>
+#include <libgen.h>
+#include <stdio.h>
 
 
 int regex_check(char * path, char * value) {
@@ -30,27 +32,9 @@ int get_file_by_name(char * value, path_list * pl) {
         char * path = malloc(sizeof(char) * (strlen(pl->path_data[i])+1));
         strcpy(path,pl->path_data[i]);
 
-        int n = strlen(path);
-        char filename[n+1];
-
-        int j = n-1;
-        int state = 1;
-        while(j >= 0 && state) {
-            if (path[j] == '/') {
-                state = 0;
-                j++;
-            }
-            else {
-                j--;
-            }
-        }
-        path+=j;
-        strcpy(filename,path);
-        filename[n-j] = '\0';
-        path -=j;
-
-
-
+        char * path_cpy = malloc(sizeof(char) * (strlen(pl->path_data[i])+1));
+        strcpy(path_cpy,path);
+        char *filename = basename(path_cpy);
         struct stat st;
         if (stat(path, &st) == 0) {
             if (S_ISREG(st.st_mode)||1) {
@@ -70,6 +54,7 @@ int get_file_by_name(char * value, path_list * pl) {
         }
         free(path);
         i+= incr;
+        free(path_cpy);
     }
     if (pl->ptr > 0) {
         return 0;

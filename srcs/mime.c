@@ -2,6 +2,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <regex.h>
+#include <libgen.h>
 
 // make a list with all the mime types
 
