@@ -784,5 +784,10 @@ int get_file_by_mime(char * value, path_list *pl){
         i += incr;
         free(path);
     }
-    return 0;
+    if (pl->ptr > 0) {
+        return 0;
+    }
+    else {
+        return 2;
+    }
 }

@@ -40,7 +40,7 @@ int get_file_by_mode(path_list * pl, int mode) {
         return 0;
     }
     else {
-        return 1;
+        return 2;
     }
 }
 

@@ -75,7 +75,7 @@ int get_file_by_name(char * value, path_list * pl) {
         return 0;
     }
     else {
-        return 1;
+        return 2;
     }
     
 }

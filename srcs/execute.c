@@ -32,7 +32,10 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
                 else{
                     //printf("Test mode is off\n");
                 }                
-                get_file_by_mode(p_list,parser.file_mod);
+                int test = get_file_by_mode(p_list,parser.file_mod);
+                if (test == 2) {
+                    return 2;
+                }
             } else {
 
 		parser_t parser;
@@ -72,6 +75,9 @@ int exec_find(path_list *p_list,token_list * tl) {
                 //printf("Error : No file found with name '%s'\n",token.value);
                 return 1;
             }
+            else if (error == 2) {
+                return 2;
+            }
             break;
         
         case TOKEN_SIZE:
@@ -79,6 +85,9 @@ int exec_find(path_list *p_list,token_list * tl) {
             if (error == 1) {
                 //printf("Error : No file found with size '%s'\n",token.value);
                 return 1;
+            }
+            else if (error == 2) {
+                return 2;
             }
             break;
 
@@ -88,12 +97,18 @@ int exec_find(path_list *p_list,token_list * tl) {
                 //printf("Error : No file found with last activity of '%s'\n",token.value);
                 return 1;
             }
+            else if (error == 2) {
+                return 2;
+            }
             break;
         case TOKEN_MIME:
             error = get_file_by_mime(token.value,p_list);
             if (error == 1) {
                 //printf("Error : No file found with mime type '%s'\n",token.value);
                 return 1;
+            }
+            else if (error == 2) {
+                return 2;
             }
             break;
         default :

@@ -90,7 +90,7 @@ int get_file_by_size(char * value, path_list * pl) {
         return 0;
     }
     else {
-        return 1;
+        return 2;
     }
 }
 
