@@ -2,13 +2,23 @@
 
 #include "../includes/dirent.h"
 
-void ft_fetch_path(path_list *pl, const char *path) {
+void ft_fetch_path(path_list *pl, const char *path, int first) {
     DIR *dir; // permet de garder en mémoire le dossier
     struct dirent *entry;
     
     if (!(dir = opendir(path))){
         return;
     }
+
+    if((strcmp(path,".") != 0 || strcmp(path,"..") != 0) &&  first == 1){
+            // on ignore les dossiers . et .. car non voulu
+	char * first_path;
+	first_path = malloc(strlen(path) + 2);
+	strcpy(first_path,path);
+	add_path(pl,first_path);
+	
+    }
+
 
     while((entry = readdir(dir)) != NULL) {
         char *new_path;
@@ -23,7 +33,7 @@ void ft_fetch_path(path_list *pl, const char *path) {
         add_path(pl, new_path);
 
         if (entry->d_type == DT_DIR){
-            ft_fetch_path(pl, new_path);
+            ft_fetch_path(pl, new_path,0);
         }
         
     }
