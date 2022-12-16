@@ -49,7 +49,7 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
                 return 1;
             }
         }
-    if (argc==2){
+    if (argc==2 || (argc==3 && strcmp(argv[2],"-color") == 0)){
         if (verify_path(argv[1]) == 0){
             ft_fetch_path(p_list, argv[1],1);
         } else {       
@@ -65,6 +65,7 @@ int exec_find(path_list *p_list,token_list * tl) {
 
     token_item token;
     token_t tok;
+    int color_mod = 0;
     for (int i = 0; i < tl->ptr; i++){
         token = tl->data[i];
         tok = token.token;
@@ -137,10 +138,16 @@ int exec_find(path_list *p_list,token_list * tl) {
                 return 1;
             }
             break;
+        case TOKEN_COLOR :
+            color_mod = 1;
+            break;
         default :
             break;
         }
     
+    }
+    if(color_mod) {
+        return 42;
     }
     return 0;
 }

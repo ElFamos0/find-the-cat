@@ -1,6 +1,9 @@
 // list recursively one directory
 
 #include "../includes/dirent.h"
+#include <libgen.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 void ft_fetch_path(path_list *pl, const char *path, int first) {
     DIR *dir; // permet de garder en mémoire le dossier
@@ -86,6 +89,38 @@ void print_path_list(path_list *l){
     for (int i = 0; i < l->ptr; i++){
         if (l->path_data[i] != NULL){
             printf("%s\n", l->path_data[i]);
+        }
     }
 }
+
+void print_path_list_with_color(path_list *l) {
+    for (int i = 0; i < l->ptr; i++){
+        if (l->path_data[i] != NULL){
+            struct stat st;
+            if (stat(l->path_data[i], &st) == 0) {
+                if (S_ISREG(st.st_mode)) {
+                    char * path_cpy = malloc(sizeof(char) * (strlen(l->path_data[i])+1));
+                    strcpy(path_cpy,l->path_data[i]);
+                    char *filename = basename(path_cpy);
+
+                    char *path_cpy2 = malloc(sizeof(char) * (strlen(l->path_data[i])+1));
+                    strcpy(path_cpy2,l->path_data[i]);
+                    char *pathname = dirname(path_cpy2);
+
+                    printf("\033[0;32m%s/\033[0;31m%s\n", pathname,filename);
+                    printf("\033[0m");
+                    free(path_cpy);
+                    free(path_cpy2);
+
+                }
+                else if (S_ISDIR(st.st_mode)) {
+                    printf("\033[0;36m%s\n", l->path_data[i]);
+                    printf("\033[0m");
+                }
+                else {
+                    printf("%s\n", l->path_data[i]);
+                }
+            }
+        }
+    }
 }

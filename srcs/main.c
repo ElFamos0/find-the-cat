@@ -38,16 +38,25 @@ int main(int argc, char *argv[])
         return 0;
     }
     
-    if (exec_find(&pl,&tl) == 1) {
+
+    test = exec_find(&pl,&tl) ;
+    if (test == 1) {
 
         //printf("Early interruption.\n");
         free_all(&pl,&tl);
         return 1;
     }
 
-    else if (exec_find(&pl,&tl) == 2) {
+    else if (test == 2) {
 
         //printf("No file found.\n");
+        free_all(&pl,&tl);
+        return 0;
+    }
+
+    else if (test == 42) {
+    
+        print_path_list_with_color(&pl);
         free_all(&pl,&tl);
         return 0;
     }
