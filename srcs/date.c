@@ -47,7 +47,7 @@ int get_file_by_date(char * value, path_list * pl){
         struct stat st;
 
         if (stat(path, &st) == 0) {
-            if (S_ISREG(st.st_mode)) {
+            if (S_ISREG(st.st_mode) || 1) {
 
                 stat(path, &st);
                 time_t file_time = st.st_mtime;

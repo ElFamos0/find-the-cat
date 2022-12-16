@@ -7,6 +7,7 @@ int make_parser(parser_t *p,token_list *l,int argc, char *argv[]) {
     int incr = 0;
     p->test_mode = 0;
     p->error_tok = 0;
+    p->file_mod = 0;
 
     while (i < argc) {
         if (!argv[i]) {
@@ -148,17 +149,11 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
         }
         break;
     case TOKEN_DIR :
-        if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
-            printf("Error : Option -date was not provided with a value.\n");
-            p->error_tok = 1;
-            return -1;
-        }
-        else {
-        create_token_item(&t, tok, argv[i+1], i);
+        create_token_item(&t, tok, "None", i);
         add_token(l,&t);
+        p->file_mod = 1;
         free(t.value);
-        incr = 1;
-        }
+        incr = 0;
         break;
     case TOKEN_COLOR :
         if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {

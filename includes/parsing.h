@@ -8,6 +8,7 @@ typedef struct _parsing_t {
     int test_mode;
     int error_nb;
     int error_tok;
+    int file_mod;
 } parser_t;
 
 

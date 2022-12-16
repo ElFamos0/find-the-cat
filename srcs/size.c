@@ -42,7 +42,7 @@ int get_file_by_size(char * value, path_list * pl) {
         struct stat st;
 
         if (stat(path, &st) == 0) {
-            if (S_ISREG(st.st_mode)) {
+            if (S_ISREG(st.st_mode)||1) {
 
                 stat(path, &st);
                 off_t file_size = st.st_size;

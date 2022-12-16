@@ -31,7 +31,7 @@ int get_file_by_name(char * value, path_list * pl) {
         strcpy(path,pl->path_data[i]);
         struct stat st;
         if (stat(path, &st) == 0) {
-            if (S_ISREG(st.st_mode)) {
+            if (S_ISREG(st.st_mode)||1) {
                 if (regex_check(path, value) == 0) {
                     //printf("Found file %s.\n", path);
                 }

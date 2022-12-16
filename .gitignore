@@ -4,3 +4,4 @@ objs/
 build/
 ftc
 arbre/
+tests/

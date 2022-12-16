@@ -7,6 +7,7 @@
 #include "../includes/size.h"
 #include "../includes/date.h"
 #include "../includes/mime.h"
+#include "../includes/dir.h"
 
 
 int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
@@ -31,10 +32,11 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
                 else{
                     //printf("Test mode is off\n");
                 }                
-
+                get_file_by_mode(p_list,parser.file_mod);
             } else {
+
 		parser_t parser;
-    		make_parser(&parser,l,argc,argv);
+    	make_parser(&parser,l,argc,argv);
 		if(parser.test_mode == 1){
 		    print_token_list(l);
 		}
@@ -45,6 +47,7 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
     if (argc==2){
         if (verify_path(argv[1]) == 0){
             ft_fetch_path(p_list, argv[1],1);
+            get_file_by_mode(p_list,0);
         } else {       
             printf("Path is invalid.\n");
             return 1;
