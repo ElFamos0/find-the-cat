@@ -33,7 +33,10 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
                 else{
                     //printf("Test mode is off\n");
                 }                
-                get_file_by_mode(p_list,parser.file_mod);
+                if (get_file_by_mode(p_list,parser.file_mod)) {
+                    return 2;
+                }
+
             } else {
 
 		parser_t parser;

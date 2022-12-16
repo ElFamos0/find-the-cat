@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
         free_all(&pl,&tl);
         return 1;
     }
-    if (test == -1 && test == 2) {
+    if (test == -1 || test == 2) {
         free_all(&pl,&tl);
         if (test == 2) {
             //printf("No file found.\n");
