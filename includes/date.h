@@ -5,6 +5,6 @@
 #include "../includes/dirent.h"
 
 int get_file_by_date(char * value, path_list * pl);
-int get_date(char * value);
+int get_date(char * value, int * is_special);
 
 #endif

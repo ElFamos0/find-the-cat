@@ -27,13 +27,10 @@ int get_file_by_date(char * value, path_list * pl){
             signe = -1;
             break;
         default :
-            if (!(isdigit(value[0]))) {
-                return 1;
-            }
             break;
     }
-    
-    int date_obj = get_date(value);
+    int is_special;
+    int date_obj = get_date(value, &is_special);
     //printf("Signe : %d\n",signe);
     if (date_obj == -1) {
         return 1;
@@ -51,32 +48,89 @@ int get_file_by_date(char * value, path_list * pl){
 
                 stat(path, &st);
                 time_t file_time = st.st_mtime;
-                switch (signe)
-                {
-                case 1 :
-                    if (!((difftime(curr_time,file_time)) > date_obj)) {
-                            delete_path(pl, path);
-                            incr = 0;
+                if (is_special == 0) {                    
+                    switch (signe)
+                    {
+                    case 1 :
+                        if (!((difftime(curr_time,file_time)) > date_obj)) {
+                                delete_path(pl, path);
+                                incr = 0;
+                        }
+                        break;
+
+                    case -1 :
+                        if (!((difftime(curr_time,file_time)) <= date_obj)) {
+                                delete_path(pl, path);
+                                incr = 0;
+                            }
+                        break;
+                    
+                    default:
+                        if (!((difftime(curr_time,file_time)) <= date_obj)) {
+                                delete_path(pl, path);
+                                incr = 0;
+                            }
+                        break;
                     }
-                    break;
 
-                case -1 :
-                    if (!((difftime(curr_time,file_time)) <= date_obj)) {
-                            delete_path(pl, path);
-                            incr = 0;
-                        }
-                    break;
-                
-                default:
-                    if (!((difftime(curr_time,file_time)) <= date_obj)) {
-                            delete_path(pl, path);
-                            incr = 0;
-                        }
-                    break;
                 }
+                else {
+                    
+                    if(strcmp(value,"yesterday") != 0) {
+                        switch (signe){
+                        case 1 :
+                            if (!((difftime(curr_time,file_time)) > date_obj)) {
+                                    delete_path(pl, path);
+                                    incr = 0;
+                            }
+                            break;
 
-                
+                        case -1 :
+                            if (!((difftime(curr_time,file_time)) <= date_obj)) {
+                                    delete_path(pl, path);
+                                    incr = 0;
+                                }
+                            break;
+                        
+                        default:
+                            if (!((difftime(curr_time,file_time)) <= date_obj)) {
+                                    delete_path(pl, path);
+                                    incr = 0;
+                                }
+                            break;
+                        }
+
+                    } else {
+                        int date_obj2 = 0;
+                        int sp;
+                        switch (signe){
+                        case 1 :
+                            if (!((difftime(curr_time,file_time)) > date_obj)) {
+                                    delete_path(pl, path);
+                                    incr = 0;
+                            }
+                            break;
+
+                        case -1 :
+                            if (!((difftime(curr_time,file_time)) <= date_obj)) {
+                                    delete_path(pl, path);
+                                    incr = 0;
+                                }
+                            break;
+                        
+                        default:
+                           date_obj2 = get_date("today",&sp);
+                            if (!(((difftime(curr_time,file_time)) <= date_obj && (difftime(curr_time,file_time)) > date_obj2 ))) {
+                                    delete_path(pl, path);
+                                    incr = 0;
+                                }
+                            break;
+                        }
+
+                    }
+
                 }
+            }
             else {
                     delete_path(pl, path);
                     incr = 0;
@@ -94,14 +148,80 @@ int get_file_by_date(char * value, path_list * pl){
     }
 }
 
-int get_date(char * value){
+int get_date(char * value, int * is_special){
     int size = 0;
     int mult = 1;
     int len = strlen(value);
     int i = 0;
-
+    time_t curr_time = time(NULL);
+    struct tm *tm = localtime(&curr_time);
     char str[2] = "\0";
 
+    if (strcmp(value, "today") == 0) {
+        tm->tm_sec = 0;
+        tm->tm_hour = 0;
+        tm->tm_min = 0;
+
+        *is_special = 1;
+        return difftime(curr_time, mktime(tm));
+
+    } else if (strcmp(value, "yesterday") == 0) {
+        tm->tm_sec = 0;
+        tm->tm_hour = 0;
+        tm->tm_min = 0;
+        int d_per_mo[12] = {31,28 + (tm->tm_year % 4 == 0),31,30,31,30,31,31,30,31,30,31} ;
+        if(tm->tm_mday > 1) {
+            tm->tm_mday -= 1;
+            tm->tm_yday -=1;
+            tm->tm_wday = (tm->tm_wday -1) % 7;
+            *is_special = 1;
+            return difftime(curr_time, mktime(tm));
+        }
+        else if (tm->tm_mon >0) {
+            tm->tm_mon -=1;
+            tm->tm_yday -=1;
+            tm->tm_wday = (tm->tm_wday -1) % 7;
+            tm->tm_mday = d_per_mo[tm->tm_mon];
+            *is_special = 1;
+            return difftime(curr_time, mktime(tm));
+        }
+        else {
+            tm->tm_mon = 0;
+            tm->tm_yday = 0;
+            tm->tm_wday = (tm->tm_wday -1) % 7;
+            tm->tm_mday = 31;
+            *is_special = 1;
+            return difftime(curr_time, mktime(tm));
+        }
+
+    } else if (strcmp(value, "now") == 0) {
+        int old_min = tm->tm_min;
+        tm->tm_min = (old_min - 2 ) % 60;
+        if (old_min < 2) {
+            if (tm->tm_hour > 0) {
+                tm->tm_hour -=1;
+            }
+            else {
+                tm->tm_sec = 0;
+                tm->tm_hour = 0;
+                tm->tm_min = 0;
+            }
+        }
+        *is_special = 1;
+        return difftime(curr_time, mktime(tm));
+
+    } else if (strcmp(value, "this month") == 0) {
+        tm->tm_sec = 0;
+        tm->tm_hour = 0;
+        tm->tm_min = 0;
+        int old_mday = tm->tm_mday;
+        tm->tm_mday= 1;
+        tm->tm_yday -= (old_mday-1) ;
+        tm->tm_wday = (tm->tm_wday - old_mday +1) % 7;
+        *is_special = 1;
+        return difftime(curr_time, mktime(tm));
+    } 
+    *is_special = 0;
     switch (value[len-1])
     {
     case 's':
@@ -140,6 +260,5 @@ int get_date(char * value){
         i++;
     }
     
-
     return size*mult;
 }

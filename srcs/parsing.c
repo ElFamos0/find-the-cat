@@ -117,15 +117,29 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
             return -1;
         }
         else {
-        create_token_item(&t, tok, argv[i+1], i);
-        add_token(l,&t);
-        free(t.value);
-        incr = 1;
+
+            if (i+2 == argc || detect_token(argv[i+2]) != TOKEN_UNKNOWN) {
+                create_token_item(&t, tok, argv[i+1], i);
+                add_token(l,&t);
+                free(t.value);
+                incr = 1;
+            
+            }
+            else {
+                char str[strlen(argv[i+1]) + 2 + strlen(argv[i+2])];
+                strcpy(str, argv[i+1]);
+                strcat(str, " ");
+                strcat(str, argv[i+2]);
+                create_token_item(&t, tok, str, i);
+                add_token(l,&t);
+                free(t.value);
+                incr = 2;
+            }          
         }
         break;
     case TOKEN_MIME :
         if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
-            printf("Error : Option -date was not provided with a value.\n");
+            printf("Error : Option -mime was not provided with a value.\n");
             p->error_tok = 1;
             return -1;
         }
@@ -138,7 +152,7 @@ int set_token_opt(parser_t *p, token_list *l, token_t tok, int argc, char *argv[
         break;
     case TOKEN_CTC :
         if (i+1 == argc || detect_token(argv[i+1]) != TOKEN_UNKNOWN) {
-            printf("Error : Option -date was not provided with a value.\n");
+            printf("Error : Option -ctc was not provided with a value.\n");
             p->error_tok = 1;
             return -1;
         }
