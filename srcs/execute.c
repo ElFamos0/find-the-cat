@@ -16,7 +16,8 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
 
     create_path_list(p_list, 1);
     create_tokenl(l, 1);
-    if (argc >2) {
+    
+    if (argc > 3 || (argc == 3 && strcmp(argv[2],"-color") != 0)) {
         // Most common cases
         if (verify_path(argv[1]) == 0){
                 //printf("Path is valid.\n");
@@ -48,14 +49,24 @@ int exec_parser(int argc, char *argv[],path_list *p_list, token_list * l){
                 //printf("Path is invalid.\n");
                 return 1;
             }
-        }
-    if (argc==2 || (argc==3 && strcmp(argv[2],"-color") == 0)){
+    }
+    else if (argc==2){
         if (verify_path(argv[1]) == 0){
             ft_fetch_path(p_list, argv[1],1);
         } else {       
             printf("Path is invalid.\n");
             return 1;
         }
+    }
+    else if (argc==3 && strcmp(argv[2],"-color") == 0) {
+        if (verify_path(argv[1]) == 0){
+            ft_fetch_path(p_list, argv[1],1);
+            return 42;
+        } else {       
+            printf("Path is invalid.\n");
+            return 1;
+        }
+
     }
     return 0;
 

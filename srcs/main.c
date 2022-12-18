@@ -37,6 +37,12 @@ int main(int argc, char *argv[])
 
         return 0;
     }
+
+    if (test == 42) {
+        print_path_list_with_color(&pl);
+        free_all(&pl,&tl);
+        return 0;
+    }
     
 
     test = exec_find(&pl,&tl) ;
