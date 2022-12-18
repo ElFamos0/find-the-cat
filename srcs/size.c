@@ -23,6 +23,7 @@ int get_file_by_size(char * value, path_list * pl) {
             break;
         default :
             if (!(isdigit(value[0]))) {
+                printf("La taille %s n'est pas une taille valide\n",value);
                 return 1;
             }
             break;
@@ -31,6 +32,7 @@ int get_file_by_size(char * value, path_list * pl) {
     int size = get_size(value);
     //printf("Signe : %d\n",signe);
     if (size == -1) {
+        printf("La taille %s n'est pas une taille valide\n",value);
         return 1;
     }
    

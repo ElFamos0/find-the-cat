@@ -33,6 +33,7 @@ int get_file_by_date(char * value, path_list * pl){
     int date_obj = get_date(value, &is_special);
     //printf("Signe : %d\n",signe);
     if (date_obj == -1) {
+        printf("La date %s n'est pas une date valide\n",value);
         return 1;
     }
    
